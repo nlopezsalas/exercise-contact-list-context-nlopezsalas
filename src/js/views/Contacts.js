@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from "../component/ContactCard.js";
@@ -8,6 +9,15 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
+
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.getAgenda();
+	}, []);
+
+	const lastAgenda = store.agenda;
+	console.log(lastAgenda);
 
 	return (
 		<div className="container">
@@ -19,10 +29,19 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						<ContactCard onDelete={() => setState({ showModal: true })} />
+						{lastAgenda &&
+							lastAgenda.map(contact => (
+								<ContactCard
+									key={contact.id}
+									contact={contact}
+									onDelete={() => setState(prevState => ({ ...prevState, showModal: true }))}
+								/>
+							))}
+
+						{/* <ContactCard onDelete={() => setState({ showModal: true })} />
 						<ContactCard />
 						<ContactCard />
-						<ContactCard />
+						<ContactCard /> */}
 					</ul>
 				</div>
 			</div>
