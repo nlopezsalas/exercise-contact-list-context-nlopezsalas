@@ -16,9 +16,6 @@ export const Contacts = () => {
 		actions.getAgenda();
 	}, []);
 
-	const lastAgenda = store.agenda;
-	console.log(lastAgenda);
-
 	return (
 		<div className="container">
 			<div>
@@ -29,19 +26,13 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						{lastAgenda &&
-							lastAgenda.map(contact => (
-								<ContactCard
-									key={contact.id}
-									contact={contact}
-									onDelete={() => setState(prevState => ({ ...prevState, showModal: true }))}
-								/>
-							))}
-
-						{/* <ContactCard onDelete={() => setState({ showModal: true })} />
-						<ContactCard />
-						<ContactCard />
-						<ContactCard /> */}
+						{store.agenda.map(contact => (
+							<ContactCard
+								key={contact.id}
+								contact={contact}
+								onDelete={() => setState(prevState => ({ ...prevState, showModal: true }))}
+							/>
+						))}
 					</ul>
 				</div>
 			</div>
