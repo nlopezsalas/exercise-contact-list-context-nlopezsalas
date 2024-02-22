@@ -5,15 +5,6 @@ import PropTypes from "prop-types";
 
 export const Modal = props => {
 	const { store, actions } = useContext(Context);
-	let modalContent;
-
-	// const [newContactData, setNewContactData] = useState({
-	// 	full_name: props.contact.full_name || "",
-	// 	email: props.contact.email || "",
-	// 	agenda_slug: "natalial.salas",
-	// 	address: props.contact.address || "",
-	// 	phone: props.contact.phone || ""
-	// });
 	const [newContactData, setNewContactData] = useState({
 		full_name: props.contact && props.contact.full_name ? props.contact.full_name : "",
 		email: props.contact && props.contact.email ? props.contact.email : "",
@@ -21,14 +12,13 @@ export const Modal = props => {
 		address: props.contact && props.contact.address ? props.contact.address : "",
 		agenda_slug: "natalial.salas"
 	});
+	let modalContent;
 
 	function handleInputChange(e) {
 		const { name, value } = e.target;
 		setNewContactData({ ...newContactData, [name]: value });
 	}
-
-	console.log("Modal: " + props.modalId);
-
+	
 	if (props.modalId === "delete") {
 		modalContent = (
 			<>
