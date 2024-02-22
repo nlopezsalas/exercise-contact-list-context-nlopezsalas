@@ -18,7 +18,7 @@ export const Modal = props => {
 		const { name, value } = e.target;
 		setNewContactData({ ...newContactData, [name]: value });
 	}
-	
+
 	if (props.modalId === "delete") {
 		modalContent = (
 			<>
