@@ -7,7 +7,9 @@ import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		contact: {},
+		modalId: ""
 	});
 
 	const { store, actions } = useContext(Context);
@@ -30,13 +32,35 @@ export const Contacts = () => {
 							<ContactCard
 								key={contact.id}
 								contact={contact}
-								onDelete={() => setState(prevState => ({ ...prevState, showModal: true }))}
+								onDelete={() => {
+									console.log("deleting...");
+									setState(prevState => ({
+										...prevState,
+										showModal: true,
+										contact: contact,
+										modalId: "delete"
+									}));
+								}}
+								onUpdate={() => {
+									console.log("updating...");
+									setState(prevState => ({
+										...prevState,
+										showModal: true,
+										contact: contact,
+										modalId: "update"
+									}));
+								}}
 							/>
 						))}
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal
+				show={state.showModal}
+				onClose={() => setState({ showModal: false })}
+				contact={state.contact}
+				modalId={state.modalId}
+			/>
 		</div>
 	);
 };
