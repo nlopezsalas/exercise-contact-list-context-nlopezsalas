@@ -58,6 +58,23 @@ export const Contacts = () => {
 					<Link className="btn btn-success" to="/add">
 						Add new contact
 					</Link>
+
+					{/* <Link
+						className="btn btn-success"
+						to={{
+							pathname: "/add",
+							state: { isCreatingAgenda: false } // Pasar el estado indicando que se está creando una agenda
+						}}>
+						Add new contact
+					</Link>
+					<Link
+						className="btn btn-success"
+						to={{
+							pathname: "/add",
+							state: { isCreatingAgenda: true } // Pasar el estado indicando que se está creando una agenda
+						}}>
+						Add new agenda
+					</Link> */}
 				</p>
 
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">

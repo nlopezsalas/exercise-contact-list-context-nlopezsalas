@@ -46,6 +46,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 						});
 				});
 			},
+			// createAgenda: contactData => {
+			// 	return new Promise((resolve, reject) => {
+			// 		const myHeaders = new Headers();
+			// 		myHeaders.append("Content-Type", "application/json");
+
+			// 		const raw = JSON.stringify(contactData);
+
+			// 		const requestOptions = {
+			// 			method: "POST",
+			// 			headers: myHeaders,
+			// 			body: raw,
+			// 			redirect: "follow"
+			// 		};
+
+			// 		fetch("https://playground.4geeks.com/apis/fake/contact/", requestOptions)
+			// 			.then(response => response.json())
+			// 			.then(result => {
+			// 				console.log(result);
+			// 				setStore({ currentUser: contactData.agenda_slug });
+			// 			})
+			// 			.catch(error => {
+			// 				console.error(error);
+			// 			});
+			// 	});
+			// },
+
 			getAgenda: agendaSlug => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/${agendaSlug}`, {
 					method: "GET",
