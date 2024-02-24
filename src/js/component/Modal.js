@@ -5,18 +5,54 @@ import PropTypes from "prop-types";
 
 export const Modal = props => {
 	const { store, actions } = useContext(Context);
-	const [newContactData, setNewContactData] = useState({
-		full_name: props.contact && props.contact.full_name ? props.contact.full_name : "",
-		email: props.contact && props.contact.email ? props.contact.email : "",
-		phone: props.contact && props.contact.phone ? props.contact.phone : "",
-		address: props.contact && props.contact.address ? props.contact.address : "",
-		agenda_slug: "natalial.salas"
-	});
+	// const [newContactData, setNewContactData] = useState({
+	// 	full_name: props.contact && props.contact.full_name ? props.contact.full_name : "",
+	// 	email: props.contact && props.contact.email ? props.contact.email : "",
+	// 	phone: props.contact && props.contact.phone ? props.contact.phone : "",
+	// 	address: props.contact && props.contact.address ? props.contact.address : "",
+	// 	agenda_slug: "natalial.salas"
+	// });
+	// let modalContent;
+
+	// function handleInputChange(e) {
+	// 	const { name, value } = e.target;
+	// 	setNewContactData(prevData => ({
+	// 		...prevData,
+	// 		[name]: value !== "" ? value : (props.contact && props.contact[name]) || ""
+	// 	}));
+	// }
+
 	let modalContent;
+
+	const [newContactData, setNewContactData] = useState({
+		full_name: "",
+		email: "",
+		phone: "",
+		address: "",
+		agenda_slug: store.currentUser
+	});
+
+	const [initialContactData, setInitialContactData] = useState({});
+
+	useEffect(() => {
+		if (props.contact) {
+			setNewContactData({
+				full_name: props.contact.full_name || "",
+				email: props.contact.email || "",
+				phone: props.contact.phone || "",
+				address: props.contact.address || "",
+				agenda_slug: store.currentUser
+			});
+			setInitialContactData(props.contact);
+		}
+	}, [props.contact]);
 
 	function handleInputChange(e) {
 		const { name, value } = e.target;
-		setNewContactData({ ...newContactData, [name]: value });
+		setNewContactData(prevData => ({
+			...prevData,
+			[name]: value
+		}));
 	}
 
 	if (props.modalId === "delete") {

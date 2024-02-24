@@ -10,18 +10,20 @@ export const AddContact = () => {
 		email: "",
 		address: "",
 		phone: "",
-		agenda_slug: "natalial.salas"
+		agenda_slug: store.currentUser
 	});
 
-	// Este efecto se ejecutará cada vez que full_name cambie
+	//Actualizar la agenda_url con el full name sin espacios, en minúsculas y sin acentos
 	// useEffect(() => {
 	// 	if (contactData.full_name) {
-	// 		// Calcular agenda_slug a partir de full_name
-	// 		const agenda_slug = contactData.full_name.toLowerCase().replace(/\s+/g, "");
-	// 		// Actualizar contactData con el nuevo valor de agenda_slug
+	// 		const agenda_slug = removeAccents(contactData.full_name.toLowerCase().replace(/\s+/g, ""));
 	// 		setContactData({ ...contactData, agenda_slug });
 	// 	}
-	// }, [contactData.full_name]); // Dependencia del efecto: contactData.full_name
+	// }, [contactData.full_name]);
+
+	// function removeAccents(str) {
+	// 	return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+	// }
 
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -33,7 +35,9 @@ export const AddContact = () => {
 
 	const handleSave = () => {
 		console.log(contactData);
-		actions.createUser(contactData);
+		actions.createUser(contactData).then(() => {
+			actions.getAgenda(store.currentUser); // Actualizar lista de contactos después de agregar un nuevo contacto
+		});
 	};
 
 	return (
@@ -82,13 +86,6 @@ export const AddContact = () => {
 						/>
 					</div>
 					<button type="button" className="btn btn-primary form-control" onClick={handleSave}>
-						{/* <button
-						type="button"
-						className="btn btn-primary form-control"
-						onClick={e => {
-							handleSave;
-							window.location = "/";
-						}}> */}
 						save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/">
