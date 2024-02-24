@@ -30,7 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "POST",
 						headers: myHeaders,
 						body: raw,
-						redirect: "follow"
 					};
 
 					fetch("https://playground.4geeks.com/apis/fake/contact/", requestOptions)
@@ -75,7 +74,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAgenda: agendaSlug => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/${agendaSlug}`, {
 					method: "GET",
-					redirect: "follow"
 				})
 					.then(response => response.json())
 					.then(result => {
@@ -94,7 +92,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE",
 					headers: myHeaders,
 					body: raw,
-					redirect: "follow"
 				};
 
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, requestOptions)
@@ -119,7 +116,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "PUT",
 					headers: myHeaders,
 					body: raw,
-					redirect: "follow"
 				};
 
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, requestOptions)
