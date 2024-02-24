@@ -20,13 +20,13 @@ export const Contacts = () => {
 	};
 
 	useEffect(() => {
-		actions.getUsers();
+		actions.getAgenda();
 	}, []);
 
 	useEffect(() => {
-		actions.getUsers();
+		actions.getAgenda();
 		if (selectedAgenda !== "") {
-			actions.getAgenda(selectedAgenda);
+			actions.getAgendaContacts(selectedAgenda);
 		}
 	}, [selectedAgenda]);
 

@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// (Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
-			getUsers: () => {
+			getAgenda: () => {
 				const requestOptions = { method: "GET", redirect: "follow" };
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/", requestOptions)
 					.then(response => response.json())
@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.error(error));
 			},
-			createUser: contactData => {
+			createContact: contactData => {
 				return new Promise((resolve, reject) => {
 					const myHeaders = new Headers();
 					myHeaders.append("Content-Type", "application/json");
@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const requestOptions = {
 						method: "POST",
 						headers: myHeaders,
-						body: raw,
+						body: raw
 					};
 
 					fetch("https://playground.4geeks.com/apis/fake/contact/", requestOptions)
@@ -71,9 +71,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 	});
 			// },
 
-			getAgenda: agendaSlug => {
+			getAgendaContacts: agendaSlug => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/${agendaSlug}`, {
-					method: "GET",
+					method: "GET"
 				})
 					.then(response => response.json())
 					.then(result => {
@@ -91,13 +91,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const requestOptions = {
 					method: "DELETE",
 					headers: myHeaders,
-					body: raw,
+					body: raw
 				};
 
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, requestOptions)
 					.then(response => {
 						if (response.status == 201) {
-							getActions().getAgenda(getStore().currentUser);
+							getActions().getAgendaContacts(getStore().currentUser);
 						}
 						return response.json();
 					})
@@ -115,14 +115,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const requestOptions = {
 					method: "PUT",
 					headers: myHeaders,
-					body: raw,
+					body: raw
 				};
 
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, requestOptions)
 					.then(response => {
 						console.log(response);
 						if (response.status == 201) {
-							getActions().getAgenda(getStore().currentUser);
+							getActions().getAgendaContacts(getStore().currentUser);
 						}
 						return response.json();
 					})

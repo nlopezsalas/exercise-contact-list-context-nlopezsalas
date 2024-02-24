@@ -37,8 +37,8 @@ export const AddContact = () => {
 
 	const handleSave = () => {
 		console.log(contactData);
-		actions.createUser(contactData).then(() => {
-			actions.getAgenda(store.currentUser); // Actualizar lista de contactos después de agregar un nuevo contacto
+		actions.createContact(contactData).then(() => {
+			actions.getAgendaContacts(store.currentUser); // Actualizar lista de contactos después de agregar un nuevo contacto
 		});
 	};
 
